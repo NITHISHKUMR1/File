@@ -1,0 +1,66 @@
+import random
+
+tu = ['O', 'A', 'B', 'C', 'D', 'U']
+f = open('D:\\VS Codes\\Python\\Lab _Exercise\\result.txt', 'w')
+n = int(input("Enter the number of students: "))
+
+for i in range(n):
+    total_marks = 0
+    lst = []
+    name = input(f"Enter the name of student {i+1}: ")
+    reg_no = int(input(f"Enter student {i+1} Reg no: "))
+    lst.append(name)
+    lst.append(reg_no)
+
+    for j in range(5):
+        mark = random.choice(tu)
+        lst.append(mark)
+
+    for mark in lst[2:7]:
+        if mark == 'O':
+            total_marks += 10
+        elif mark == 'A':
+            total_marks += 9
+        elif mark == 'B':
+            total_marks += 8
+        elif mark == 'C':
+            total_marks += 7
+        elif mark == 'D':
+            total_marks += 6
+        # 'U' mark does not add to the total_marks
+    
+    lst.append(total_marks)
+    percentage = (total_marks / 50) * 100
+    lst.append(percentage)
+    
+    f.write(str(lst) + "\n")
+    print(f"Details added for student {i+1}")
+
+print("Details Successfully Added👍")
+f.close()
+
+# ANALYSIS OF A FILE BASED ON A CONDITION
+
+f = open('D:\\VS Codes\\Python\\Lab _Exercise\\result.txt', 'r')
+lines = f.readlines()
+
+for line in lines:
+    lst = eval(line)
+    if lst[8] >= 90:
+        print("Students who scored 90% and above:")
+    elif 80 <= lst[8] < 90:
+        print("Students who scored equal to or above 80% and below 90%:")
+    elif 70 <= lst[8] < 80:
+        print("Students who scored equal to or above 70% and below 80%:")
+    else:
+        print("Students who scored below 70%:")
+    
+    print(lst[0])
+
+    for i in range(2, 7):
+        if lst[i] == 'U':
+            print("Students who got Arrear:")
+            print(lst[0])
+            break
+
+f.close()
